@@ -1,11 +1,10 @@
-# Nockwork
+# Arcwork
 
 Version 1.1 is a working reference implementation of a local-first computer
-runtime whose component ownership and licensing can be settled on Robinhood
-Chain.
+runtime whose component ownership and licensing can be settled on Arc.
 
-This is an independent open-source experiment. It is not an official Robinhood
-product.
+This is an independent open-source experiment. It is not an official Circle or
+Arc product.
 
 ## What V1 does
 
@@ -22,9 +21,9 @@ product.
 
 ## Architecture
 
-The local runtime executes software and protects private data. Robinhood Chain
-stores shared facts: who published a component, its current code hash, who has
-access, when that access expires, and how payments should be distributed.
+The local runtime executes software and protects private data. Arc stores shared
+facts: who published a component, its current code hash, who has access, when
+that access expires, and how USDC payments should be distributed.
 
 Large binaries and private files do not belong onchain. A component artifact can
 live on ordinary hosting or content-addressed storage. Its SHA-256 digest is
@@ -45,11 +44,12 @@ under Chain Settings to enable wallet-backed testnet or mainnet purchases.
 The demo builds a tiny WebAssembly component, registers a development license,
 verifies its hash and manifest, and executes it through the capability kernel.
 
-## Robinhood Chain
+## Arc
 
-Mainnet uses chain ID 4663. Testnet uses chain ID 46630. V1 defaults to testnet
-for deployment scripts. Set RPC_URL, PRIVATE_KEY and REGISTRY_ADDRESS in your
-environment; never place a private key in this repository.
+Arc Mainnet uses chain ID 5042. Arc Testnet uses chain ID 5042002. Both networks
+use 18-decimal USDC as the native gas token. Deployment scripts default to
+testnet. Set RPC_URL, PRIVATE_KEY and REGISTRY_ADDRESS in your environment;
+never place a private key in this repository.
 
 ## Security boundary
 

@@ -1,13 +1,13 @@
-# Nockwork
+# Arcwork
 
-Nockwork is an open-source experiment in building a computer system whose software components can be owned, licensed, transferred and settled through Robinhood Chain.
+Arcwork is an open-source experiment in building a computer system whose software components can be owned, licensed, transferred and settled through Arc.
 
-The computer itself remains local-first: code executes on the user's device, while the chain records shared facts such as component publishers, code hashes, licenses, access expiry and payments. Nockwork is independent and is not an official Robinhood product.
+The computer itself remains local-first: code executes on the user's device, while Arc records shared facts such as component publishers, code hashes, licenses, access expiry and USDC payments. Arcwork is independent and is not an official Circle or Arc product.
 
 ## Explore the project
 
-- [Project website and source browser](https://nockwork.xyz/)
-- [Open the Nockwork system](https://nockwork.xyz/system/)
+- [Project website and source browser](https://arcwork.xyz/)
+- [Open the Arcwork system](https://arcwork.xyz/system/)
 - [Developer documentation](repository-files/README.md)
 
 ## V1.1 includes
@@ -15,7 +15,7 @@ The computer itself remains local-first: code executes on the user's device, whi
 - Solidity registries for versioned components and fixed-price licenses
 - A local JavaScript runtime with manifest, hash and permission verification
 - A constrained WebAssembly capability kernel
-- Robinhood Chain mainnet and testnet configuration
+- Arc mainnet and testnet configuration
 - An in-memory development provider and EVM read provider
 - A browser system for discovering, installing and running components
 - Contract compilation, runtime tests and an end-to-end local demo

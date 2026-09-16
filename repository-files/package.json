@@ -1,9 +1,9 @@
 {
-  "name": "nockwork",
+  "name": "arcwork",
   "version": "1.1.0",
   "private": true,
   "type": "module",
-  "description": "A local-first computer runtime with ownership, licensing and settlement on Robinhood Chain.",
+  "description": "A local-first computer runtime with ownership, licensing and settlement on Arc.",
   "scripts": {
     "build": "node scripts/build.mjs",
     "test": "node --test",

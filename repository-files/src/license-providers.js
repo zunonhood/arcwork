@@ -5,7 +5,7 @@ import {
   keccak256,
   stringToHex
 } from "viem";
-import { robinhoodTestnet } from "./networks.js";
+import { arcTestnet } from "./networks.js";
 
 const marketAbi = [{
   type: "function",
@@ -23,7 +23,7 @@ export function componentId(name) {
 }
 
 export class ChainLicenseProvider {
-  constructor({ marketAddress, chain = robinhoodTestnet, rpcUrl } = {}) {
+  constructor({ marketAddress, chain = arcTestnet, rpcUrl } = {}) {
     if (!marketAddress) throw new Error("marketAddress is required");
     this.marketAddress = getAddress(marketAddress);
     this.client = createPublicClient({

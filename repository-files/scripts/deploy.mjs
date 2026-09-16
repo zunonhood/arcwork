@@ -6,7 +6,7 @@ import {
   http
 } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
-import { robinhoodTestnet } from "../src/networks.js";
+import { arcTestnet } from "../src/networks.js";
 
 const privateKey = process.env.PRIVATE_KEY;
 if (!privateKey) throw new Error("Set PRIVATE_KEY in the environment");
@@ -21,10 +21,10 @@ const loadArtifact = async name => JSON.parse(await readFile(
 ));
 
 const chain = {
-  ...robinhoodTestnet,
+  ...arcTestnet,
   rpcUrls: {
     default: {
-      http: [process.env.RPC_URL ?? robinhoodTestnet.rpcUrls.default.http[0]]
+      http: [process.env.RPC_URL ?? arcTestnet.rpcUrls.default.http[0]]
     }
   }
 };

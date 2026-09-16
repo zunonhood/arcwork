@@ -4,36 +4,36 @@ import {
   custom,
   getAddress,
   http,
-  parseEther
+  parseUnits
 } from "viem";
 import { MarketClient } from "../src/market-client.js";
-import { robinhoodMainnet, robinhoodTestnet } from "../src/networks.js";
+import { arcMainnet, arcTestnet } from "../src/networks.js";
 
 const catalog = [
   {
     id:"creative/pixel-forge",listingId:0,name:"Pixel Forge",icon:"PF",
-    category:"Creative",price:"0.004 ETH",wei:parseEther("0.004"),term:"30 DAYS",
+    category:"Creative",price:"4.00 USDC",wei:parseUnits("4",18),term:"30 DAYS",
     developer:"0x7A3F…91C2",
     description:"A local image workspace with non-destructive layers and export tools.",
     permissions:["storage:read","storage:write"]
   },
   {
     id:"agents/research-node",listingId:1,name:"Research Node",icon:"RN",
-    category:"Agents",price:"0.002 ETH",wei:parseEther("0.002"),term:"7 DAYS",
+    category:"Agents",price:"2.00 USDC",wei:parseUnits("2",18),term:"7 DAYS",
     developer:"0x19B4…A08E",
     description:"A source-first research agent that produces traceable working notes.",
     permissions:["network:fetch","storage:write"]
   },
   {
     id:"compute/render-grid",listingId:2,name:"Render Grid",icon:"RG",
-    category:"Compute",price:"0.006 ETH",wei:parseEther("0.006"),term:"24 HOURS",
+    category:"Compute",price:"6.00 USDC",wei:parseUnits("6",18),term:"24 HOURS",
     developer:"0xE620…4F12",
     description:"A metered pool of remote rendering capacity for short production jobs.",
     permissions:["network:fetch"]
   },
   {
     id:"storage/quiet-vault",listingId:3,name:"Quiet Vault",icon:"QV",
-    category:"Storage",price:"0.003 ETH",wei:parseEther("0.003"),term:"30 DAYS",
+    category:"Storage",price:"3.00 USDC",wei:parseUnits("3",18),term:"30 DAYS",
     developer:"0x82D1…77AB",
     description:"Encrypted, content-addressed storage controlled by the owner's key.",
     permissions:["storage:read","storage:write","network:fetch"]
@@ -42,12 +42,12 @@ const catalog = [
     id:"system/mono-shell",listingId:4,name:"Mono Shell",icon:"MS",
     category:"Interface",price:"FREE",wei:0n,term:"PERPETUAL",
     developer:"0x41C0…3B99",
-    description:"A restrained keyboard-first shell for the Nockwork environment.",
+    description:"A restrained keyboard-first shell for the Arcwork environment.",
     permissions:["storage:read"]
   },
   {
     id:"tools/ledger-sheet",listingId:5,name:"Ledger Sheet",icon:"LS",
-    category:"Productivity",price:"0.001 ETH",wei:parseEther("0.001"),term:"90 DAYS",
+    category:"Productivity",price:"1.00 USDC",wei:parseUnits("1",18),term:"90 DAYS",
     developer:"0xB506…D440",
     description:"A programmable local spreadsheet with verifiable calculation modules.",
     permissions:["storage:read","storage:write"]
@@ -60,9 +60,9 @@ const state = {
   filter:"All",
   search:"",
   account:null,
-  installed:JSON.parse(localStorage.getItem("nockwork-installed") ?? "[]"),
-  activity:JSON.parse(localStorage.getItem("nockwork-activity") ?? "[]"),
-  config:JSON.parse(localStorage.getItem("nockwork-config") ?? "{}")
+  installed:JSON.parse(localStorage.getItem("arcwork-installed") ?? "[]"),
+  activity:JSON.parse(localStorage.getItem("arcwork-activity") ?? "[]"),
+  config:JSON.parse(localStorage.getItem("arcwork-config") ?? "{}")
 };
 
 function escapeHtml(value){
@@ -124,8 +124,8 @@ function renderInspector(){
 }
 
 function save(){
-  localStorage.setItem("nockwork-installed",JSON.stringify(state.installed));
-  localStorage.setItem("nockwork-activity",JSON.stringify(state.activity.slice(0,50)));
+  localStorage.setItem("arcwork-installed",JSON.stringify(state.installed));
+  localStorage.setItem("arcwork-activity",JSON.stringify(state.activity.slice(0,50)));
   $("#installedCount").textContent=state.installed.length;
 }
 
@@ -141,7 +141,7 @@ function setStatus(message){
 }
 
 function chain(){
-  return state.config.network==="mainnet"?robinhoodMainnet:robinhoodTestnet;
+  return state.config.network==="mainnet"?arcMainnet:arcTestnet;
 }
 
 function chainConfigured(){
@@ -274,7 +274,7 @@ function openView(name){
 }
 
 function loadSettings(){
-  $("#networkInput").value=state.config.network??"testnet";
+  $("#networkInput").value=state.config.network??"mainnet";
   $("#registryInput").value=state.config.registryAddress??"";
   $("#marketInput").value=state.config.marketAddress??"";
 }
@@ -292,7 +292,7 @@ $("#settingsForm").onsubmit=event=>{
       registryAddress:registry?getAddress(registry):"",
       marketAddress:market?getAddress(market):""
     };
-    localStorage.setItem("nockwork-config",JSON.stringify(state.config));
+    localStorage.setItem("arcwork-config",JSON.stringify(state.config));
     loadSettings();updateMode();
     setStatus(chainConfigured()?"Chain configuration saved":"Local demo mode enabled");
   }catch(error){setStatus(error.message)}

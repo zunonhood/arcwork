@@ -3428,9 +3428,6 @@ function carry(digits) {
   }
   return `1${out.join("")}`;
 }
-function fromEther(ether, unit = "wei") {
-  return from(ether, exponents.ether - exponents[unit]);
-}
 var exponents, InvalidDecimalNumberError, InvalidDecimalsError;
 var init_Value = __esm({
   "node_modules/viem/_esm/utils/unit/Value.js"() {
@@ -15809,12 +15806,6 @@ function formatUnits(value, decimals) {
   return format(value, decimals);
 }
 
-// node_modules/viem/_esm/utils/unit/parseEther.js
-init_Value();
-function parseEther(ether, unit = "wei") {
-  return fromEther(ether, unit);
-}
-
 // node_modules/viem/_esm/utils/unit/parseUnits.js
 init_Value();
 function parseUnits(value, decimals) {
@@ -19068,24 +19059,24 @@ init_toHex();
 init_keccak256();
 
 // src/networks.js
-var robinhoodMainnet = Object.freeze({
-  id: 4663,
-  name: "Robinhood Chain",
-  nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
-  rpcUrls: { default: { http: ["https://rpc.mainnet.chain.robinhood.com"] } },
+var arcMainnet = Object.freeze({
+  id: 5042,
+  name: "Arc",
+  nativeCurrency: { name: "USDC", symbol: "USDC", decimals: 18 },
+  rpcUrls: { default: { http: ["https://rpc.mainnet.arc.io"] } },
   blockExplorers: {
-    default: { name: "Blockscout", url: "https://robinhoodchain.blockscout.com" }
+    default: { name: "Arc Explorer", url: "https://explorer.arc.io" }
   }
 });
-var robinhoodTestnet = Object.freeze({
-  id: 46630,
-  name: "Robinhood Chain Testnet",
-  nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
-  rpcUrls: { default: { http: ["https://rpc.testnet.chain.robinhood.com"] } },
+var arcTestnet = Object.freeze({
+  id: 5042002,
+  name: "Arc Testnet",
+  nativeCurrency: { name: "USDC", symbol: "USDC", decimals: 18 },
+  rpcUrls: { default: { http: ["https://rpc.testnet.arc.io"] } },
   blockExplorers: {
     default: {
-      name: "Blockscout",
-      url: "https://explorer.testnet.chain.robinhood.com"
+      name: "Arc Testnet Explorer",
+      url: "https://explorer.testnet.arc.io"
     }
   },
   testnet: true
@@ -19282,8 +19273,8 @@ var catalog = [
     name: "Pixel Forge",
     icon: "PF",
     category: "Creative",
-    price: "0.004 ETH",
-    wei: parseEther("0.004"),
+    price: "4.00 USDC",
+    wei: parseUnits("4", 18),
     term: "30 DAYS",
     developer: "0x7A3F\u202691C2",
     description: "A local image workspace with non-destructive layers and export tools.",
@@ -19295,8 +19286,8 @@ var catalog = [
     name: "Research Node",
     icon: "RN",
     category: "Agents",
-    price: "0.002 ETH",
-    wei: parseEther("0.002"),
+    price: "2.00 USDC",
+    wei: parseUnits("2", 18),
     term: "7 DAYS",
     developer: "0x19B4\u2026A08E",
     description: "A source-first research agent that produces traceable working notes.",
@@ -19308,8 +19299,8 @@ var catalog = [
     name: "Render Grid",
     icon: "RG",
     category: "Compute",
-    price: "0.006 ETH",
-    wei: parseEther("0.006"),
+    price: "6.00 USDC",
+    wei: parseUnits("6", 18),
     term: "24 HOURS",
     developer: "0xE620\u20264F12",
     description: "A metered pool of remote rendering capacity for short production jobs.",
@@ -19321,8 +19312,8 @@ var catalog = [
     name: "Quiet Vault",
     icon: "QV",
     category: "Storage",
-    price: "0.003 ETH",
-    wei: parseEther("0.003"),
+    price: "3.00 USDC",
+    wei: parseUnits("3", 18),
     term: "30 DAYS",
     developer: "0x82D1\u202677AB",
     description: "Encrypted, content-addressed storage controlled by the owner's key.",
@@ -19338,7 +19329,7 @@ var catalog = [
     wei: 0n,
     term: "PERPETUAL",
     developer: "0x41C0\u20263B99",
-    description: "A restrained keyboard-first shell for the Nockwork environment.",
+    description: "A restrained keyboard-first shell for the Arcwork environment.",
     permissions: ["storage:read"]
   },
   {
@@ -19347,8 +19338,8 @@ var catalog = [
     name: "Ledger Sheet",
     icon: "LS",
     category: "Productivity",
-    price: "0.001 ETH",
-    wei: parseEther("0.001"),
+    price: "1.00 USDC",
+    wei: parseUnits("1", 18),
     term: "90 DAYS",
     developer: "0xB506\u2026D440",
     description: "A programmable local spreadsheet with verifiable calculation modules.",
@@ -19361,9 +19352,9 @@ var state = {
   filter: "All",
   search: "",
   account: null,
-  installed: JSON.parse(localStorage.getItem("nockwork-installed") ?? "[]"),
-  activity: JSON.parse(localStorage.getItem("nockwork-activity") ?? "[]"),
-  config: JSON.parse(localStorage.getItem("nockwork-config") ?? "{}")
+  installed: JSON.parse(localStorage.getItem("arcwork-installed") ?? "[]"),
+  activity: JSON.parse(localStorage.getItem("arcwork-activity") ?? "[]"),
+  config: JSON.parse(localStorage.getItem("arcwork-config") ?? "{}")
 };
 function escapeHtml(value) {
   return String(value).replace(/[&<>"']/g, (ch) => ({
@@ -19413,8 +19404,8 @@ function renderInspector() {
   $("#inspectSource").onclick = () => setStatus(item.id);
 }
 function save() {
-  localStorage.setItem("nockwork-installed", JSON.stringify(state.installed));
-  localStorage.setItem("nockwork-activity", JSON.stringify(state.activity.slice(0, 50)));
+  localStorage.setItem("arcwork-installed", JSON.stringify(state.installed));
+  localStorage.setItem("arcwork-activity", JSON.stringify(state.activity.slice(0, 50)));
   $("#installedCount").textContent = state.installed.length;
 }
 function addActivity(action, item, status = "COMPLETE") {
@@ -19431,7 +19422,7 @@ function setStatus(message) {
   $("#statusMessage").textContent = message;
 }
 function chain() {
-  return state.config.network === "mainnet" ? robinhoodMainnet : robinhoodTestnet;
+  return state.config.network === "mainnet" ? arcMainnet : arcTestnet;
 }
 function chainConfigured() {
   return Boolean(state.config.registryAddress && state.config.marketAddress);
@@ -19567,7 +19558,7 @@ function openView(name) {
   if (name === "activity") renderActivity();
 }
 function loadSettings() {
-  $("#networkInput").value = state.config.network ?? "testnet";
+  $("#networkInput").value = state.config.network ?? "mainnet";
   $("#registryInput").value = state.config.registryAddress ?? "";
   $("#marketInput").value = state.config.marketAddress ?? "";
 }
@@ -19584,7 +19575,7 @@ $("#settingsForm").onsubmit = (event) => {
       registryAddress: registry ? getAddress(registry) : "",
       marketAddress: market ? getAddress(market) : ""
     };
-    localStorage.setItem("nockwork-config", JSON.stringify(state.config));
+    localStorage.setItem("arcwork-config", JSON.stringify(state.config));
     loadSettings();
     updateMode();
     setStatus(chainConfigured() ? "Chain configuration saved" : "Local demo mode enabled");
